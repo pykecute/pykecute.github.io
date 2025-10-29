@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gửi Kiều Trinh - 20/10 dịu dàng 🌸</title>
+
+<!-- Font & CSS -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<style>
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #fff8f9, #fceff5);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  color: #444;
+}
+
+/* Section */
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+
+/* Intro */
+#intro h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 54px;
+  color: #ff7da5;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+@keyframes fadeIn { to {opacity: 1;} }
+
+.start-btn {
+  margin-top: 40px;
+  padding: 15px 40px;
+  border: none;
+  background-color: #ff7da5;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.start-btn:hover { background-color: #ff5e8f; }
+
+/* Message */
+#message {
+  background: linear-gradient(to top, #fff, #fdf2f8);
+  padding: 80px 20px;
+}
+.typing {
+  border-right: 2px solid #ff7da5;
+  white-space: pre-line;
+  overflow: hidden;
+  font-size: 20px;
+  line-height: 1.8;
+  max-width: 800px;
+  text-align: left;
+}
+
+/* Gallery */
+#gallery {
+  background: #fff;
+  padding: 60px 20px;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.gallery img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.5s ease;
+}
+.gallery img:hover { transform: scale(1.05); }
+
+/* Surprise */
+#surprise {
+  background: linear-gradient(120deg, #ffe3ec, #f9e6f3);
+}
+.surprise-btn {
+  padding: 15px 50px;
+  border: none;
+  background: #ff7da5;
+  color: white;
+  font-size: 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.surprise-btn:hover { background: #ff5e8f; }
+
+/* Ending */
+#ending {
+  background: linear-gradient(to bottom, #fff0f5, #f9e6f3);
+  color: #ff7da5;
+  font-size: 26px;
+  font-family: 'Great Vibes', cursive;
+  padding: 60px 20px;
+}
+
+/* Heart */
+.heart {
+  position: fixed;
+  top: -10px;
+  color: #ff7da5;
+  font-size: 20px;
+  animation: fall linear forwards;
+  z-index: 9999;
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* Fireworks */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10000;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Intro -->
+<section id="intro">
+  <h1>Gửi đến Kiều Trinh 🌷</h1>
+  <button class="start-btn" onclick="scrollToSection('message')">Xem lời chúc</button>
+</section>
+
+<!-- Message -->
+<section id="message">
+  <div class="typing" id="typedText"></div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <h2 style="color:#ff7da5; font-family:'Great Vibes', cursive; font-size:45px; margin-bottom:30px;">Một vài điều nhỏ xinh 📸</h2>
+  <div class="gallery">
+    <img src="Ảnh chụp màn hình (678).png" alt="Ảnh 1">
+    <img src="Ảnh chụp màn hình (676).png" alt="Ảnh 2">
+    <img src="Ảnh chụp màn hình (658).png" alt="Ảnh 3">
+  </div>
+</section>
+
+<!-- Surprise -->
+<section id="surprise">
+  <button class="surprise-btn" onclick="showFireworks()">💌 Bấm để nhận điều nhỏ xinh từ Tính</button>
+</section>
+
+<!-- Ending -->
+<section id="ending">
+  <h2>Cảm ơn Trinh, vì đã khiến ngày của Tính trở nên đặc biệt hơn 🌸</h2>
+</section>
+
+<canvas id="fireworks"></canvas>
+
+<!-- Nhạc nền -->
+<audio id="bgMusic" loop autoplay>
+  <source src="https://cdn.pixabay.com/download/audio/2023/01/12/audio_7e556cb19b.mp3?filename=until-i-found-you-piano-cover-135848.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// Cuộn mượt
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// Gõ chữ
+const text = `Trinh này,  
+Tính biết lời chúc qua màn hình không thể bằng một đóa hoa thật,  
+nhưng hy vọng nó vẫn mang chút gì đó dễ thương và ấm áp đến Trinh trong ngày 20/10.  
+  
+Có những người chỉ xuất hiện qua vài dòng tin nhắn,  
+mà vẫn khiến mình thấy vui, thấy nhẹ lòng hơn mỗi khi trò chuyện.  
+Tính nghĩ Trinh là một trong số ít người như vậy đó.  
+  
+Chúc Trinh hôm nay cười nhiều hơn một chút,  
+nhận được nhiều lời chúc hơn một chút,  
+và có một ngày 20/10 thật bình yên –  
+như cách Trinh vẫn mang đến cảm giác bình yên cho người khác vậy. 🌷  
+  
+Cảm ơn Trinh – vì đã xuất hiện,  
+dù chỉ là trong vài cuộc trò chuyện,  
+cũng đủ khiến ngày của Tính bớt bình thường hơn.`;
+
+let index = 0;
+function typeEffect() {
+  if (index < text.length) {
+    document.getElementById('typedText').innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 45);
+  }
+}
+window.onload = () => {
+  setTimeout(typeEffect, 2000);
+  playMusic();
+  setInterval(createHeart, 800);
+};
+
+// Nhạc tự bật
+function playMusic() {
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.45;
+  music.play().catch(() => {
+    document.body.addEventListener("click", () => music.play(), { once: true });
+  });
+}
+
+// Tim rơi
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerText = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+// Pháo hoa
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+window.addEventListener("resize", () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+});
+
+let particles = [];
+function showFireworks() {
+  for (let i = 0; i < 50; i++) {
+    particles.push({
+      x: innerWidth / 2,
+      y: innerHeight / 2,
+      color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+      radius: Math.random() * 4 + 1,
+      vx: (Math.random() - 0.5) * 10,
+      vy: (Math.random() - 0.5) * 10,
+      alpha: 1
+    });
+  }
+  animate();
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.fillStyle = "rgba(0,0,0,0.1)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((p, i) => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.alpha -= 0.02;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.alpha;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    if (p.alpha <= 0) particles.splice(i, 1);
+  });
+}
+</script>
+</body>
+</html>
